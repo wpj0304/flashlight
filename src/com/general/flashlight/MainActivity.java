@@ -4,6 +4,7 @@ package com.general.flashlight;
 import com.general.waps.Advertisement;
 import com.general.waps.QuitPopAd;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.onlineconfig.OnlineConfigAgent;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -41,8 +42,18 @@ public class MainActivity extends Activity implements View.OnClickListener
 
 		but01.setOnClickListener(this);
 		
+		// 友盟在线参数
+		OnlineConfigAgent.getInstance().updateOnlineConfig(this);
+		String floatValue = OnlineConfigAgent.getInstance().getConfigParams(this, "float_view");
+		
 		// 广告 ------------
-		Advertisement.getInstance(this).showAdSelectad(true, true, true);
+		// 悬浮窗 开关
+		boolean floatState = false;
+		if ("0".equals(floatValue))
+		{
+			floatState = true;
+		}
+		Advertisement.getInstance(this).showAdSelectad(true, floatState, true);
 		
 	}
 
