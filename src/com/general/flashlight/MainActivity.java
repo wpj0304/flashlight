@@ -1,6 +1,8 @@
 package com.general.flashlight;
 
 
+import com.general.waps.Advertisement;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.hardware.Camera;
@@ -36,6 +38,8 @@ public class MainActivity extends Activity implements View.OnClickListener
 
 		but01.setOnClickListener(this);
 		
+		// 广告 ------------
+		new Advertisement(this).showAdSelectad(true, true, true);
 		
 	}
 
