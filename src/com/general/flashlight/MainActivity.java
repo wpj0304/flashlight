@@ -2,6 +2,7 @@ package com.general.flashlight;
 
 
 import com.general.waps.Advertisement;
+import com.general.waps.QuitPopAd;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -40,14 +42,13 @@ public class MainActivity extends Activity implements View.OnClickListener
 		but01.setOnClickListener(this);
 		
 		// 广告 ------------
-		new Advertisement(this).showAdSelectad(true, true, true);
+		Advertisement.getInstance(this).showAdSelectad(true, true, true);
 		
 	}
 
 	@Override
 	protected void onResume()
 	{
-		// TODO Auto-generated method stub
 		super.onResume();
 		MobclickAgent.onResume(this);
 	}
@@ -55,7 +56,6 @@ public class MainActivity extends Activity implements View.OnClickListener
 	@Override
 	protected void onPause()
 	{
-		// TODO Auto-generated method stub
 		super.onPause();
 		MobclickAgent.onPause(this);
 	}
@@ -64,7 +64,6 @@ public class MainActivity extends Activity implements View.OnClickListener
 	@Override
 	public void onClick(View v)
 	{
-		// TODO Auto-generated method stub
 		if (v.getId() == R.id.but01)
 		{
 			but01Achieve();
@@ -105,14 +104,26 @@ public class MainActivity extends Activity implements View.OnClickListener
 			layoutParams = getWindow().getAttributes();
 		}
 	}
+	
+	
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if(keyCode == KeyEvent.KEYCODE_BACK)
+		{
+			QuitPopAd.getInstance().show(this);
+		}
+		return false;
+	}
 
 	@Override
 	protected void onDestroy()
 	{
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		camera.stopPreview();
 		camera.release();
+		Advertisement.getInstance(this).close();
 	}
 
 }

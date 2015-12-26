@@ -13,11 +13,26 @@ import android.widget.RelativeLayout;
 
 public class Advertisement
 {
-	private Context context;
+	private static Context context;
+	private static Advertisement advertisement;
+	private ShowFloat showFloat;
 
-	public Advertisement(Context con)
+	public static Advertisement getInstance(Context con)
 	{
-		context = con;
+		if(null == advertisement)
+		{
+			context = con;
+			advertisement = new Advertisement();
+			init();
+		}
+		return advertisement;
+	}
+	
+	/**
+	 * 初始化
+	 */
+	private static void init()
+	{
 		final String APP_ID = "a0eca6078930a93dec7a2c2be546b4f3"; // 应用标识
 		final String APP_PID = "default"; // 分发渠道标识
 		AppConnect.getInstance(APP_ID, APP_PID, context);// 初始化统计器，并通过代码设置APP_ID,
@@ -68,7 +83,8 @@ public class Advertisement
 	 */
 	public void showOfferAd()
 	{
-		new ShowFloat(context).showFloat();//显示悬浮窗
+		showFloat = new ShowFloat(context);
+		showFloat.showFloat();//显示悬浮窗
 	}
 
 	/**
@@ -97,5 +113,17 @@ public class Advertisement
 				}
 			}
 		}).start();
+	}
+	
+	/**
+	 *  关闭广告
+	 */
+	public void close()
+	{
+		AppConnect.getInstance(context).close();
+		if(null != showFloat)
+		{
+			showFloat.onShowFloatDestroy();
+		}
 	}
 }
