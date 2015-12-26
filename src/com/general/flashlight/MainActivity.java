@@ -2,6 +2,7 @@ package com.general.flashlight;
 
 
 import com.general.waps.Advertisement;
+import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -48,6 +49,7 @@ public class MainActivity extends Activity implements View.OnClickListener
 	{
 		// TODO Auto-generated method stub
 		super.onResume();
+		MobclickAgent.onResume(this);
 	}
 
 	@Override
@@ -55,6 +57,7 @@ public class MainActivity extends Activity implements View.OnClickListener
 	{
 		// TODO Auto-generated method stub
 		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 	
 
