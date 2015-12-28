@@ -1,13 +1,11 @@
 package com.general.waps;
 
-import cn.waps.AppConnect;
+import com.general.flashlight.wp.AppConnect;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -34,7 +32,7 @@ public class Advertisement
 	private static void init()
 	{
 		final String APP_ID = "a0eca6078930a93dec7a2c2be546b4f3"; // 应用标识
-		final String APP_PID = "default"; // 分发渠道标识
+		final String APP_PID = "360"; // 分发渠道标识
 		AppConnect.getInstance(APP_ID, APP_PID, context);// 初始化统计器，并通过代码设置APP_ID,
 	}
 

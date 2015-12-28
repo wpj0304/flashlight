@@ -46,7 +46,7 @@
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Channel ID" />
+            android:value="360" />
     </application>
 
 </manifest>

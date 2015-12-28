@@ -1,7 +1,8 @@
 package com.general.waps;
 
-import cn.waps.AppConnect;
-import cn.waps.SDKUtils;
+import com.general.flashlight.wp.AppConnect;
+import com.general.flashlight.wp.SDKUtils;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;

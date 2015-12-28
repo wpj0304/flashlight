@@ -2,8 +2,8 @@ package com.general.waps;
 
 
 import com.general.flashlight.R;
+import com.general.flashlight.wp.AppConnect;
 
-import cn.waps.AppConnect;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
