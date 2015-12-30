@@ -26,6 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener
 	WindowManager.LayoutParams layoutParams;
 	Camera camera;
 	Parameters parameter;
+	boolean advState = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -44,16 +45,25 @@ public class MainActivity extends Activity implements View.OnClickListener
 		
 		// 友盟在线参数
 		OnlineConfigAgent.getInstance().updateOnlineConfig(this);
-		String floatValue = OnlineConfigAgent.getInstance().getConfigParams(this, "float_view");
-		
+		String showAdc = OnlineConfigAgent.getInstance().getConfigParams(this, "show_adv"); // 是否显示广告
 		// 广告 ------------
-		// 悬浮窗 开关
-		boolean floatState = false;
-		if ("0".equals(floatValue))
+		
+		if("0".equals(showAdc))
 		{
-			floatState = true;
+			advState = true;
 		}
-		Advertisement.getInstance(this).showAdSelectad(true, floatState, true);
+		if(advState)
+		{
+			// 悬浮窗 开关
+			String floatValue = OnlineConfigAgent.getInstance().getConfigParams(this, "float_view");// 是否显示积分墙
+			boolean floatState = false;
+			if ("0".equals(floatValue))
+			{
+				floatState = true;
+			}
+			Advertisement.getInstance(this).showAdSelectad(true, floatState, true);
+		}
+		
 		
 	}
 
@@ -123,7 +133,15 @@ public class MainActivity extends Activity implements View.OnClickListener
 	{
 		if(keyCode == KeyEvent.KEYCODE_BACK)
 		{
-			QuitPopAd.getInstance().show(this);
+			if(advState)
+			{
+				QuitPopAd.getInstance().show(this);
+			}
+			else
+			{
+				return super.onKeyDown(keyCode, event);
+			}
+			
 		}
 		return false;
 	}
